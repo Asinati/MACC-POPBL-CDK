@@ -172,7 +172,29 @@ class SecurityGroups(cdk.Stack):
                                             'HTTP')
         self.honeypotSG.add_ingress_rule(ec2.Peer.any_ipv4(),
                                             ec2.Port.tcp_range(1, 64000),
-                                            'Everything elsse')
+                                            'Everything else')
+
+        # --------------------- Order HoneyPot ---------------------
+        self.orderhoneypotSG = ec2.SecurityGroup(self, 'OrderHoneyPot_SG',
+                                            security_group_name='OrderHoneyPot_SG',
+                                            vpc=vpc,
+                                            description='Order HoneyPot Security Group',
+                                            allow_all_outbound=True
+                                            )
+
+        # Inbound rules for HoneyPot_SG
+        self.orderhoneypotSG.add_ingress_rule(ec2.Peer.any_ipv4(),
+                                         ec2.Port.tcp(22),
+                                         'SSH')
+        self.orderhoneypotSG.add_ingress_rule(ec2.Peer.any_ipv4(),
+                                         ec2.Port.tcp(13003),
+                                         'Allow curl')
+        self.orderhoneypotSG.add_ingress_rule(ec2.Peer.any_ipv4(),
+                                         ec2.Port.tcp_range(0,13002),
+                                         'Everything else')
+        self.orderhoneypotSG.add_ingress_rule(ec2.Peer.any_ipv4(),
+                                         ec2.Port.tcp_range(13004, 64000),
+                                         'Everything else')
 
         # --------------------- ELK Stack / Machine Learning ---------------------
         self.elkmlSG = ec2.SecurityGroup(self, 'ELKStackML_SG',

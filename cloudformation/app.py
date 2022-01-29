@@ -13,6 +13,7 @@ from cloudformation.EC2_Flask_Consul import EC2_Flask_Consul
 from cloudformation.EC2_Client1 import EC2_Client1
 from cloudformation.EC2_Client2 import EC2_Client2
 from cloudformation.EC2_HoneyPot import EC2_HoneyPot
+from cloudformation.EC2_OrderHoneyPot import EC2_OrderHoneyPot
 from cloudformation.EC2_ELKStack_ML import EC2_ELKStack_ML
 
 
@@ -27,6 +28,7 @@ ec2_FlaskConsul = EC2_Flask_Consul(app, 'flaskconsul', vpc=vpc.vpc, sg=securityG
 ec2_Client1 = EC2_Client1(app, 'client1', vpc=vpc.vpc, sg=securityGroup.clientsSG, role=secretManager.role)
 ec2_Client2 = EC2_Client2(app, 'client2', vpc=vpc.vpc, sg=securityGroup.clientsSG, role=secretManager.role)
 ec2_HoneyPot = EC2_HoneyPot(app, 'honeypot', vpc=vpc.vpc, sg=securityGroup.honeypotSG)
+ec2_OrderHoneyPot = EC2_OrderHoneyPot(app, 'orderhoneypot', vpc=vpc.vpc, sg=securityGroup.orderhoneypotSG)
 ec2_ELKStackML = EC2_ELKStack_ML(app, 'elkstackml', vpc=vpc.vpc, sg=securityGroup.elkmlSG)
 
 app.synth()
