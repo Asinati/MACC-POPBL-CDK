@@ -9,6 +9,7 @@ cdk deploy flaskconsul --require-approval never
 cdk deploy client1 --require-approval never
 cdk deploy client2 --require-approval never
 cdk deploy honeypot --require-approval never
+cdk deploy orderhoneypot --require-approval never
 
 # cd..
 # cd..
@@ -16,4 +17,4 @@ cdk deploy honeypot --require-approval never
 # ssh -v -N -L 8000:10.0.2.21:15671 -i .\pblKey.pem ec2-user@ #IPPúblicaBastion
 # ssh -v -N -L 8080:10.0.2.31:5601 -i .\pblKey.pem ec2-user@ #IPPúblicaBastion
 
-cdk deploy "*" --require-approval never
+# cdk deploy "*" --require-approval never
